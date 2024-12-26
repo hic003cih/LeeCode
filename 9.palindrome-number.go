@@ -1,8 +1,6 @@
 package main
 
-import (
-	"strconv"
-)
+import "strconv"
 
 /*
  * @lc app=leetcode id=9 lang=golang
@@ -19,20 +17,40 @@ import (
 //		return regexp.ReplaceAllString(clean_text, "")
 //	}
 func isPalindrome(x int) bool {
-	//clean_text := cleanString(string(x))
-	var j int
+
+	//isPalindrome(121)
+
+	if x < 0 {
+		return false
+	}
 
 	text := strconv.Itoa(x)
+	i := 0
+	j := len(text) - 1
 
-	for i := 0; i < len(text)/2; i++ {
-		//fmt.Println("I:" + strconv.Itoa(i))
-		j = len(text) - 1 - i
-		//fmt.Println("J:" + strconv.Itoa(j))
-		if string(text[i]) != string(text[j]) {
+	for i < j {
+		if text[i] != text[j] {
 			return false
 		}
+
+		i++
+		j--
 	}
+
 	return true
+	//var j int
+
+	// text := strconv.Itoa(x)
+
+	// for i := 0; i < len(text)/2; i++ {
+	// 	//fmt.Println("I:" + strconv.Itoa(i))
+	// 	j = len(text) - 1 - i
+	// 	//fmt.Println("J:" + strconv.Itoa(j))
+	// 	if string(text[i]) != string(text[j]) {
+	// 		return false
+	// 	}
+	// }
+	// return true
 }
 
 // func main() {
