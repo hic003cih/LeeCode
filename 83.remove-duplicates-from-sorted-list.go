@@ -28,9 +28,14 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	current := head
 	//
 	for current != nil && current.Next != nil {
+		//If the current value is the same as the next value, then replace the next value with the value of the node after next
+		//Keep check the next value
 		if current.Val == current.Next.Val {
 			current.Next = current.Next.Next
-		} else {
+		} 
+		// If the current value is not the same as the next value
+		//Move to the next node and continue checking
+		else {
 			current = current.Next
 		}
 	}
