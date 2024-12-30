@@ -34,8 +34,13 @@ func longestCommonPrefix(strs []string) string {
 
 	prefix := strs[0] //flower
 
-	//
 	for _, str := range strs[1:] {
+
+		//str = flow, flight
+		//str => flow[:6] = "flow"
+		//prefix = "flower"
+		//
+
 		for len(prefix) > 0 && (len(prefix) > len(str) || str[:len(prefix)] != prefix) {
 			prefix = prefix[:len(prefix)-1]
 		}
