@@ -6,32 +6,37 @@
 
 // @lc code=start
 func removeElement(nums []int, val int) int {
+
 	if len(nums) == 0 {
 		return 0
 	}
+	i, j := 0, 0
 
-	//j是會移動的
-	j := 0
-
-	//固定i來循環
-	for i := 0; i < len(nums); i++ {
+	for i = 0; i < len(nums); i++ {
 		if nums[i] != val {
-			//因為要回傳刪除完以後的nums,所以要先覆蓋,指針再跳下一個
 			nums[j] = nums[i]
 			j++
 		}
 	}
+	return j
 
-	// j := 0 // Pointer for non-val elements
-
-	// for i := 0; i < len(nums); i++ {
-	// 	if nums[i] != val {
-	// 		nums[j] = nums[i]
-	// 		j++ // Move pointer for the next non-val position
-	// 	}
+	// if len(nums) == 0 {
+	// 	return 0
 	// }
 
-	return j // Number of elements not equal to val
+	// //j是會移動的
+	// j := 0
+
+	// //固定用i來循環
+	// // j指針用來沒有不重複的值
+	// for i := 0; i < len(nums); i++ {
+	// 	if nums[i] != val {
+	// 		//因為要回傳刪除完以後的nums,所以要先覆蓋,指針再跳下一個
+	// 		nums[j] = nums[i]
+	// 		j++
+	// 	}
+	// }
+	// return j // Number of elements not equal to val
 }
 
 // Input: nums = [3, 2, 2, 3], val = 3
