@@ -14,6 +14,11 @@ func lengthOfLastWord(s string) int {
 
 	// Return the length of the last word
 	return len(words[len(words)-1])
+
+	// Example Input/Output:
+	// words = ["Hello", "World"]
+	// Last word: "World"
+	// Length: 5
 }
 
 // @lc code=end

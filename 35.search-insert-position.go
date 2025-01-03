@@ -21,10 +21,11 @@ func searchInsert(nums []int, target int) int {
 
 		if nums[mid] == target {
 			return mid
-			//目標比較大,往右邊找
+			//目標比較大,左指針往中間值右邊找
 		} else if nums[mid] < target {
 			left = mid + 1
 		} else {
+			//目標比較小,右指針往中間值左邊找
 			right = mid - 1
 		}
 	}
