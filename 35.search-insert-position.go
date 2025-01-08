@@ -13,41 +13,40 @@ Output: 2
 // @lc code=start
 func searchInsert(nums []int, target int) int {
 
-	//用二分法
 	left, right := 0, len(nums)-1
 
 	for left <= right {
 		mid := left + (right-left)/2
-
 		if nums[mid] == target {
 			return mid
-			//目標比較大,左指針往中間值右邊找
 		} else if nums[mid] < target {
 			left = mid + 1
 		} else {
-			//目標比較小,右指針往中間值左邊找
 			right = mid - 1
 		}
 	}
-
 	return left
 
-	// left, right := 0, len(nums)-1
-
-	// for left <= right {
-	//     mid := left + (right-left)/2 // 防止整數溢出
-
-	//     if nums[mid] == target {
-	// 	return mid // 找到目標，返回索引
-	//     } else if nums[mid] < target {
-	// 	left = mid + 1 // 縮小範圍到右半部分
-	//     } else {
-	// 	right = mid - 1 // 縮小範圍到左半部分
-	//     }
-	// }
-
-	// return left // 當 left 超過 right 時，left 是插入位置
 }
 
+//用二分法
+
+// left, right := 0, len(nums)-1
+
+// for left <= right {
+//     mid := left + (right-left)/2 // 防止整數溢出
+
+//     if nums[mid] == target {
+// 	return mid // 找到目標，返回索引
+//	//目標比較大,左指針往中間值右邊找
+//     } else if nums[mid] < target {
+// 	left = mid + 1 // 縮小範圍到右半部分
+//     } else {
+// 	//目標比較小,右指針往中間值左邊找
+// 	right = mid - 1 // 縮小範圍到左半部分
+//     }
+// }
+
+// return left // 當 left 超過 right 時，left 是插入位置
 // @lc code=end
 
