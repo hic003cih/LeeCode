@@ -13,9 +13,12 @@ class Solution(object):
         }
         total = 0
         prev_value = 0
+        # reversed反向迭代->s = "MCMXCIV" -> 'V', 'I', 'C', 'X', 'M', 'C', 'M'
+        # 後面數字比較大要減少,前面數字比較大要加上, EX: IV -> IV 中的 I 要減掉，而非加上
         for char in reversed(s):
             current_value = roman_to_int[char]
             if current_value < prev_value:
+                # total = total - current_value
                 total -= current_value
             else:
                 total += current_value
