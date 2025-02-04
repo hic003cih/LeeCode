@@ -16,8 +16,9 @@ class Solution(object):
             if price < min_price:
                 min_price = price
             #當買入的價格是最小值存起來,計算當前的價格和買入的價格是否為最大利潤
-            elif price - min_price > max_profit:
-                    max_profit = price - min_price
+            profit = price - min_price
+            if profit > max_profit:
+                    max_profit = profit
 
         return max_profit
         """

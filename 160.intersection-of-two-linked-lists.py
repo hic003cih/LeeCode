@@ -17,9 +17,11 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
+        #if either list is empty
         if not headA or not headB:
             return None
 
+        #initialize pointers
         p1, p2 = headA, headB
 
         # listA = [4, 1, 8, 4, 5]

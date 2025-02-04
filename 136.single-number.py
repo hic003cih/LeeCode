@@ -16,6 +16,11 @@ class Solution(object):
         result = 0
         for num in nums:
             #result = result ^ num
+            # result = 0 ^ 4 = 4
+            # result = 4 ^ 1 = 5
+            # result = 5 ^ 2 = 7
+            # result = 7 ^ 1 = 6
+            # result = 6 ^ 2 = 4
             result ^= num #XOR all numbers
         return result
 # @lc code=end
