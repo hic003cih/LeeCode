@@ -17,7 +17,10 @@ class Solution(object):
         :type l2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        dummy_head = ListNode(0) # dummy node to simplify code
+        
+        #Linked List Operations
+
+        dummy_head = ListNode(0)
         current = dummy_head
         carry = 0
 
@@ -30,11 +33,13 @@ class Solution(object):
             current.next = ListNode(total % 10)
 
             current = current.next
-            if l1:l1 = l1.next
-            if l2:l2 = l2.next
-
-
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+        
         return dummy_head.next
+
+
+
 
 
         # dummy_head = ListNode(0) # dummy node to simplify code
