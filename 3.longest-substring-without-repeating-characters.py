@@ -14,19 +14,43 @@ class Solution(object):
         # arr = [2, 1, 5, 1, 3, 2]
         # s = "abcabcbb"
 
-        char_index = {}
+        char_set = set()
         left = 0
         max_length = 0
 
-        for right, left in enumerate(s):
-            if char in char_index and char_index[char] >= left:
-                left = char_index[char] + 1
-            
-            # {'a': 0}
-            char_index[char] = right
+        # pwwkew
+        # 右指針向右移動
+        # Use the right pointer to traverse the string s.
+        for right in range(len(s)):
+            # 如果右指針指到的字有在set中,表示重複了,將舊的left指針中存到的字移除,左指針的往右移
+            # If the character at right pointer is already in the set, it means a duplicate is found. Remove the character stored at the old left pointer from the set and move the left pointer  to the right.
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left += 1
+            # 將右指針指到的字加入到set中
+            # Insert the character at the right pointer into the set
+            char_set.add(s[right])
+            # 比較最大值
+            # Compare the maximum value.
             max_length = max(max_length, right - left + 1)
 
         return max_length
+
+
+
+        # char_index = {}
+        # left = 0
+        # max_length = 0
+
+        # for right, left in enumerate(s):
+        #     if char in char_index and char_index[char] >= left:
+        #         left = char_index[char] + 1
+            
+        #     # {'a': 0}
+        #     char_index[char] = right
+        #     max_length = max(max_length, right - left + 1)
+
+        # return max_length
         
 
 
