@@ -24,12 +24,12 @@ class Solution(object):
 
         # 暴力法
         # 可以得出解,但會超時
-        max_profit = 0
-        for i in range(len(prices)):
-            for j in range(i+1,len(prices)):
-                # 找出價差最大的
-                max_profit = max(max_profit, prices[j] - prices[i])
-        return max_profit
+        # max_profit = 0
+        # for i in range(len(prices)):
+        #     for j in range(i+1,len(prices)):
+        #         # 找出價差最大的
+        #         max_profit = max(max_profit, prices[j] - prices[i])
+        # return max_profit
 
         # 使用單次遍歷
         # 貪心演算法 Greedy Algorithm
