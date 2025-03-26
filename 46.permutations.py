@@ -1,7 +1,7 @@
 #
 # @lc app=leetcode id=46 lang=python
 #
-# [46] Permutations
+# [46] Permutations 
 # backtracking
 # nums = [1,2,3]
 # @lc code=start

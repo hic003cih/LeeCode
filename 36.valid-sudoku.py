@@ -39,7 +39,7 @@ class Solution(object):
                 # If the character is a space, skip it.
                 if num == '.':
                     continue
-                # 知道當前數字是哪個3x3的小方塊
+                # 知道當前數字是哪個3x3的小方塊,row的部分需要 *３,因為行只有3大塊
                 # Identify the 3x3 subgrid the current number .
                 box_index = (r // 3) * 3 + (c//3)
 
@@ -47,7 +47,7 @@ class Solution(object):
                 # Check if the number has already appeared; if so, exist as invalid.
                 if (num in rows[r]) or (num in cols[c]) or (num in boxes[box_index]):
                     return False
-                
+                (4,7)
                 # 沒出現則加入對應的集合中
                 # If it has not appeared, add it to the corresponding sets.
                 rows[r].add(num)
