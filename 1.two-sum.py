@@ -38,11 +38,9 @@ class Solution(object):
 			# 方便快點找到
 			num_map[num] = i
 
-solution = Solution()
+# solution = Solution()
 
-nums = [2,7,11,15]
-target = 9
-print(solution.twoSum(nums, target))
-		
+# nums = [2,7,11,15]
+# target = 9
+# print(solution.twoSum(nums, target))
 # @lc code=end
-

@@ -38,6 +38,7 @@ class Solution(object):
         # 再來遍歷剩下的全部的價格,減去最低的價格,得到最大利潤
 
         # 設定一個很大的初始值
+        # Configure a large initial value
         min_price = float('inf')
         max_profit = 0
         for price in prices:
