@@ -24,6 +24,8 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
+        # nums = [3, 1, 3, 4, 2]
+
         if not head or not head.next:
             return False
         #initialize slow and fast pointers, both starting at the head of the linked list
