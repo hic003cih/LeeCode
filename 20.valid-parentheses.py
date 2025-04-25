@@ -44,5 +44,7 @@ class Solution(object):
         #如果最後stack都是一對,都會pop完,最後為空,會回傳true
         return not stack
 
+        if not stack or stack[-1] != pairs[char]:
+            
 # @lc code=end
 

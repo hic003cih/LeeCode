@@ -12,9 +12,11 @@ class Solution(object):
 		# 	diff = target - num
 		# 	if diff in seen:
 		# 		#如果有存在seen中,則直接返回,不用全部都要找一遍
+		# 		# If it exists in seen, return seen[diff] and i directly, avoid unnecessary search
 		# 		#seen[diff] ->seen[2] = 0是
 		# 		return [seen[diff], i]
 		# 	#如果不存在seen中,將num存入,並給index
+		#  #If it does not exist in seen, store num and give index
 		# 	seen[num] = i
 
 		# 暴力法
@@ -25,6 +27,10 @@ class Solution(object):
 		# 			return [i, j]
 
 		# return []
+
+# nums = [2, 7, 11, 15]
+# target = 9
+
 
 		# 使用 HashMap
 		# 需要用到額外空間,但比較快

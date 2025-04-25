@@ -45,23 +45,45 @@ class Solution(object):
         # s = "abcabcbb"
         # "pwwkew"
 
-        char_index = {}
-        left = 0
-        max_length = 0
+        # char_index = {}
+        # left = 0
+        # max_length = 0
 
-        for right in range(len(s)):
-            # 找到重複的
-            if s[right] in char_index and char_index[s[right]] >= left:
-                # 找到重複的,移動左邊界
-                left = char_index[s[right]] + 1
+        # for right in range(len(s)):
+        #     # 找到重複的
+        #     if s[right] in char_index and char_index[s[right]] >= left:
+        #         # 找到重複的,移動左邊界
+        #         left = char_index[s[right]] + 1
 
-            # 更新當前位置
-            char_index[s[right]] = right
+        #     # 更新當前位置
+        #     char_index[s[right]] = right
+        #     max_length = max(max_length, right - left + 1)
+
+        # return max_length
+        
+
+        #arr = [2, 1, 5, 1, 3, 2]
+        # s = "abcabcbb"
+
+        # 用enumerate的方法去遍歷字串,並且獲取index
+        # using enumerate method to traverse the string s and get the index
+        for right, char in enumerate(s):
+            # 如果char在char_index中,並且char_index的位置大於等於left表示
+            # If char is in char_index and its position is greater than or equal to left
+            if char in char_index and char_index[char] >= left:
+                # 把left的index的位置+1
+                # Move the left pointer to the next position
+                left = char_index[char] + 1
+            # 如果沒有在index中,則新增到char_index中
+            # If char is not in char_index, add it to char_index
+            char_index[char] = right
+            # 計算最大長度
+            # Calculate the maximum length
             max_length = max(max_length, right - left + 1)
-
+        
         return max_length
 
-            
+        
 
 
 
