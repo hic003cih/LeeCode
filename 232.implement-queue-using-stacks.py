@@ -10,8 +10,10 @@ class MyQueue(object):
     # 客製化first in first out的que
     def __init__(self):
         #存第一次進來的stack
+        # Store the first come in stack
         self.in_stack = []
         # 存執行move後倒過來的stack
+        # After moving, store the reverse stack
         self.out_stack = []
 
     def push(self, x):
@@ -20,6 +22,7 @@ class MyQueue(object):
         :rtype: None
         """
         # 把新進來的數字加進in_stack
+        # Add the new number to in_stack
         self.in_stack.append(x)
 
     def pop(self):
@@ -52,10 +55,13 @@ class MyQueue(object):
     
     def move(self):
         # 只有 out_stack 是空的時候，才搬 in_stack 的資料過來,避免浪費資源
+        #  When out_stack is empty, move the elements from in_stack to out_stack, avoiding unnecessary resource consumption
         # 單靠 stack 自己，無法直接做 queue 的「先進先出」行為！需要倒過來（reverse）
+        # By using only stack, it is not possible to directly implement the "FIFO" behavior of a queue, so it needs to be reversed (reverse)
         if not self.out_stack:
             while self.in_stack:
-                # 把 in_stack 的資料一個一個pop出來塞入stackout_stack
+                # 把 in_stack 的資料一個一個pop出來塞入stackout_stack,完成reverse的動作
+                # Pop out the data from in_stack one by one and append it to out_stack, completing the reverse action
                 self.out_stack.append(self.in_stack.pop())
         
 
