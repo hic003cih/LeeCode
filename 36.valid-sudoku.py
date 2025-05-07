@@ -47,7 +47,7 @@ class Solution(object):
                 # Check if the number has already appeared; if so, exist as invalid.
                 if (num in rows[r]) or (num in cols[c]) or (num in boxes[box_index]):
                     return False
-                (4,7)
+                # (4,7)
                 # 沒出現則加入對應的集合中
                 # If it has not appeared, add it to the corresponding sets.
                 rows[r].add(num)
