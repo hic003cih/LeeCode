@@ -23,15 +23,21 @@ class Solution(object):
         #Nested function
         # compare left and right subtrees
         def isMirror(t1, t2):
+            # 如果兩個樹都是空,絕對是對稱的
             # if both tree is empty, definitely symmetric return True
             if not t1 and not t2:
                 return True
+            # 如果一個樹為空,一個不為空,絕對不是對稱
             # if only one tree is empty, definitely not symmetric return False
             if not t1 or not t2:
                 return False
-            # compare values and recursively check left and right subtrees
+            # 如果節點值不等
+            # if node value is not equal
+            if t1.val != t2.val:
+                return False
+            # 遞迴比較左右子樹,並且回傳比較後的boolean值
+            # compare values and recursively check left and right subtrees, and return boolean value
             return(
-                t1.val == t2.val and 
                 isMirror(t1.left, t2.right) and
                 isMirror(t1.right, t2.left)
             )
