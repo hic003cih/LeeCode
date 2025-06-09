@@ -12,6 +12,8 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         
+        # 初始化一個空列表 result，用於儲存所有生成的排列
+        # Initialize an empty list to store all permutations
         result = []
         n = len(nums)
 

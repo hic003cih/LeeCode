@@ -30,19 +30,52 @@ class Solution(object):
 
 # nums = [2, 7, 11, 15]
 # target = 9
+	
+		# # 初始化一個空的字典,用來存放數字和其索引的對應關係
+		# # Initialize an empty dict, used to store num and its index
+		# hash_map = {}
+		
+		# for i, num in enumerate(nums):
+		# 	complement = target - num
 
+		# 	# 如果補數(complement)存在於字典中,則返回其索引和當前索引
+		# 	# If the complement exists in the dictionary, return its index and the current index
+		# 	if complement in hash_map:
+		# 		# 返回 'complement' 在雜湊表中的索引 (hash_map[complement])
+		# 		# 和當前數字的索引 (i)。
+		# 		return [hash_map[complement], i]
+			
+		# 	# 3.2. 如果 'complement' 不在雜湊表中，
+		# 	# If 'complement' is not in the hash map,
+		# 	#      我們將當前數字 'num' 及其索引 'i' 存入雜湊表。
+		# 	# store the current number 'num' and its index 'i' into the hash map
+		# 	#      這樣，如果後續遍歷到另一個數字，它的 'complement' 剛好是 'num'，
+		# 	#      the 'complement' of the other number is 'num' if we traverse it later,
+		# 	#      我們就可以找到它了。
+		# 	#      We can find it later.
+		# 	hash_map[num] = i
 
-		# 使用 HashMap
-		# 需要用到額外空間,但比較快
-		num_map ={}
-		# enumerate(nums) 讓我們同時獲取索引值 (i) 和對應的元素 (num)
+		# return []
+
+		# Initialize a hash_map to store the numbers and indices
+		hash_map = {}
+
+		# iterate through the lists of numbers to find the solution
 		for i, num in enumerate(nums):
+
+			# If the complement is in the hashmap, return the hashmap index and i 
 			complement = target - num
-			if complement in num_map:
-				return [num_map[complement], i]
-			# 如果沒找到對應的值,將當前元素存入 HashMap
-			# 方便快點找到
-			num_map[num] = i
+			if complement in hash_map:
+				return [hash_map[complement],i]
+			# If the complement is not in the hashmap, store the current number and its index for future lookups
+			hash_map[num] = i
+		
+		# If the loop completes, and no solution is found  return an empty list
+		return []
+			
+
+		
+
 
 # solution = Solution()
 

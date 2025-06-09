@@ -51,7 +51,7 @@ class Solution(object):
             # If the node has subsequent courses, traverse subsequent courses
             if course in graph:
                 for neighbor in graph[course]:
-                    # 遞歸訪問後修課,如果有環,則返回False
+                    # 遞歸訪問後修課,如果還沒訪問狀態就是1(訪問中),則表示有環,返回False
                     # Recursively visit subsequent courses, if there is a cycle, return False
                     if not dfs(neighbor):
                         return False
@@ -65,7 +65,11 @@ class Solution(object):
         # 遍歷所有課程
         # Traverse all courses
         for course in range(numCourses):
+            # 如果該節點還沒訪問過,則遞歸訪問該節點
+            # If the node has not been visited, recursively visit the node
             if visit[course] ==0:
+                # 執行遞歸訪問,如果有環,則返回空列表
+                # Execute the recursive visit, if there is a cycle, return an empty list
                 if not dfs(course):
                     return []  # 有環 → 無法修完所有課
         
