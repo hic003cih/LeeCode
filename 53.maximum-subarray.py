@@ -77,19 +77,13 @@ class Solution(object):
 
         # Kadane’s Algorithm（最推薦）
         # Kadane 的關鍵思路 -> 如果目前的子陣列總和 < 0，就捨棄，重新開始！
-        # nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+        # nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4] 
 
-        current_sum = nums[0]
-        max_sum = nums[0]
-        # 只要記錄最大值就好了
-        # Only keep track of the maximum value.
-        for num in nums[1:]:
-            # 如果目前的子陣列總和沒有比較好，就捨棄，重新開始！
-            # If the current subarray sum is not better, discard it and start a new one.
-            current_sum = max(num, current_sum + num)
-            # 紀錄當前最大的值
-            # Record the current maximum value.
-            max_sum = max(max_sum, current_sum)
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        for i in range(1, len(nums)):
+            dp[i] = max(nums[i], dp[i-1] + nums[i])
+        return max(dp)
 
 
 

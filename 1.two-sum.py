@@ -20,6 +20,7 @@ class Solution(object):
 		# 	seen[num] = i
 
 		# 暴力法
+		# Brute-force approach
 		# 不需要用到額外空間,但比較慢
 		# for i in range(len(nums)):
 		# 	for j in range(i + 1,len(nums)):
@@ -57,22 +58,33 @@ class Solution(object):
 
 		# return []
 
-		# Initialize a hash_map to store the numbers and indices
-		hash_map = {}
-
-		# iterate through the lists of numbers to find the solution
-		for i, num in enumerate(nums):
-
-			# If the complement is in the hashmap, return the hashmap index and i 
-			complement = target - num
-			if complement in hash_map:
-				return [hash_map[complement],i]
-			# If the complement is not in the hashmap, store the current number and its index for future lookups
-			hash_map[num] = i
+		# # Brute-force approach
 		
-		# If the loop completes, and no solution is found  return an empty list
-		return []
+		# # Iterate through each number, considering it as the first element of a potential pair.
+		# for i in range(len(nums)):
+		# 	# For each nums[i], iterate through the remaining numbers to its right
+		# 	for j in range(i+1,len(nums)):
+		# 		# If the sum of the two current numbers equals target, then return the indices of the two numbers
+		# 		if target == nums[i] + nums[j]:
+		# 			return [i,j]
 			
+		# return []
+
+		#Hash_Map
+
+		hash_map = {}
+		#Iterate through the list numbers
+		for i in range(len(nums)):
+				# if the complement exists in our hash map. 
+				complement = target - nums[i]
+				if complement in hash_map:
+					# Return the index of the complement and current index 'i'
+					return [i, hash_map[complement]]
+				# This prepares the map for future numbers to find 'nums' as their complement.
+				hash_map[nums[i]] = i 
+
+		return []
+				
 
 		
 

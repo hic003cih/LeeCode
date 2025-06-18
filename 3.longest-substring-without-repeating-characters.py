@@ -15,7 +15,6 @@ class Solution(object):
         # s = "abcabcbb"
 
         char_set = set()
-        left = 0
         max_length = 0
 
         # pwwkew
@@ -65,28 +64,6 @@ class Solution(object):
         #arr = [2, 1, 5, 1, 3, 2]
         # s = "abcabcbb"
 
-        # 用enumerate的方法去遍歷字串,並且獲取index
-        # using enumerate method to traverse the string s and get the index
-        for right, char in enumerate(s):
-            # 如果char在char_index中,並且char_index的位置大於等於left表示
-            # If char is in char_index and its position is greater than or equal to left
-            if char in char_index and char_index[char] >= left:
-                # 把left的index的位置+1
-                # Move the left pointer to the next position
-                left = char_index[char] + 1
-            # 如果沒有在index中,則新增到char_index中
-            # If char is not in char_index, add it to char_index
-            char_index[char] = right
-            # 計算最大長度
-            # Calculate the maximum length
-            max_length = max(max_length, right - left + 1)
-        
-        return max_length
-
-        
-
-
-
         # char_index = {}
         # left = 0
         # max_length = 0
@@ -125,6 +102,93 @@ class Solution(object):
         #     max_length = max(max_length, right - left + 1)
 
         # return max_length
+
+    #     # Brute-force approach
+    #     # this approach might exceed time limits for very large inputs
+    #     # Outside circle
+    #     for i in range(len(s)):
+    #         # Inside circle
+    #         for j in range(i,len(s)):
+    #             # get the current string
+    #             current_substring = s[i:j+1]
+    #             #Modularity
+    #             # Check the current string has repeat chars
+    #             if self._has_no_repeating_chars(current_substring):
+    #                 # If it has no repeating chars, update the maxlength
+    #                 max_length = max(max_length, len(current_substring))
+        
+    #     return max_length
+
+    
+    # def _has_no_repeating_chars(self, substring):
+
+
+    #     char_set = set()
+    #     # Iterate through the substring
+    #     for char in substring:
+    #         # If the character already exists in the set
+    #         if char in char_set:
+    #             return False
+    #         # If it does not exist, add the character to the hash_set
+    #         char_set.add(char)
+    #     return True
+
+
+
+        # # Brute-force approach(optimized)
+        # # 
+        # n = len(s)
+        # if n ==0:
+        #     return 0
+
+        # # Outside circle
+        # for i in range(n):
+        #     # Using set to store used characters
+        #     char_set = set()
+        #     # Inside circle
+        #     for j in range(i,n):
+        #         # process the current character
+        #         char = s[j]
+        #         # If the current character already exist in the used characters set, break the inner loop
+        #         if char in char_set:
+        #             break
+        #         else:
+        #             # If the current character not in the set, append the character in the set
+        #             char_set.add(char)
+        #             # update the maximum length. The length of the current non-repeating is (j - i + 1)
+        #             max_length = max(max_length, j-i+1)
+        
+        # return max_length
+    
+        # Sliding window
+        n=len(s)
+        if n==0:
+            return 0
+        
+        # Initialize the left pointer
+        left = 0
+        # Initialize the set to stored the used characters
+        char_set = set()
+
+        # Iterate through the string
+        for right in range(n):
+            # Store the current character
+            current_char = s[right]
+            # If the current character exists in the used characters set
+            # It means the current_char is already present within the current window s[left:right]
+            # Therefore, we need to shrink the window from the left
+            # until the current_char is not exists in the used characters set
+            while current_char in char_set:
+                char_set.remove(s[left])
+                left +=1
+
+            char_set.add(current_char)
+
+            max_length = max(max_length, right - left +1)
+
+        return max_length
+
+
         
 # @lc code=end
 

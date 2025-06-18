@@ -24,13 +24,21 @@ public:
         // }
         // return result;
 
-        if (n < 0)
-            return false;
-        while (n % 2 == 0)
+        if (n > 0)
         {
-            n = n / 2;
+            return result = (n & (n - 1)) == 0;
         }
-        return n == 1;
+        return result;
+
+        //     if (n <= 0)
+        //     {
+        //         return false;
+        //     }
+        //     while (n % 2 == 0)
+        //     {
+        //         n = n / 2;
+        //     }
+        //     return n == 1;
     }
 };
 // @lc code=end
