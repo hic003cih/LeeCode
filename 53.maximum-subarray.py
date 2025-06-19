@@ -12,14 +12,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        nums = []
+        #nums = []
         
         # 當前子陣列的總和
         # The sum of the current sub array.
-        max_sum = float('-inf')
+        # max_sum = float('-inf')
         # 儲存目前找到的最大子陣列總和
         # Store the maximum sub array sum found so far.
-        current_sum = 0
+        # current_sum = 0
 
 
         # for num in nums:
@@ -75,18 +75,85 @@ class Solution(object):
 
 
 
-        # Kadane’s Algorithm（最推薦）
-        # Kadane 的關鍵思路 -> 如果目前的子陣列總和 < 0，就捨棄，重新開始！
-        # nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4] 
+        # # Kadane’s Algorithm（最推薦）
+        # # Kadane 的關鍵思路 -> 如果目前的子陣列總和 < 0，就捨棄，重新開始！
+        # # nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4] 
 
-        dp = [0] * len(nums)
-        dp[0] = nums[0]
-        for i in range(1, len(nums)):
-            dp[i] = max(nums[i], dp[i-1] + nums[i])
-        return max(dp)
+        # dp = [0] * len(nums)
+        # dp[0] = nums[0]
+        # for i in range(1, len(nums)):
+        #     dp[i] = max(nums[i], dp[i-1] + nums[i])
+        # return max(dp)
+
+        # # Brute-force approach
+        # # This approach has a high time complexity and may exceed time limits
+        # n = len(nums)
+        # if n ==0:
+        #     return 0 
+        # #Initialize max_overall_sum with the first element's value
+        # max_overall_sum = nums[0]
+
+        # # Outer loop, 'i' represents the staring index of a potential subarray
+        # for i in range(n):
+        #     current_sum = 0
+        #     # Inner loop, 'j' represents the ending index of the current subarray, extending from 'i'
+        #     # compare current_sum with max_overall_sum and update if a new maximum is found.
+        #     for j in range(i, n):
+        #      # Calculate the sum of all subarrays
+        #         current_sum = current_sum + nums[j]
+        #         max_overall_sum = max(max_overall_sum, current_sum)
+        
+        # return max_overall_sum
+                
+        # # Dynamic Programming
+
+        # n = len(nums)
+        # if n ==0:
+        #     return 0 
+        
+        # #Initialize a DP array of size n 
+        # # Base case: The maximum subarray sum ending at index 0 is simply nums[0] itself.
+        # dp = [0] * n
+        # #Initialize nums[0] as a first element
+        # dp[0] = nums[0]
+
+        # # Initialize dp[0] as max_overall_sum
+        # max_overall_sum = dp[0]
 
 
+        # for i in range(1,n):
+        #     # This represents the choice between: starring a new subarray at nums[i], or extending the subarray ending at (i-1).
+        #     # If nums[i] alone is greater, it signifies that extending the previous subarray would lead to a smaller sum.
+        #     dp[i] = max(nums[i],dp[i-1] + nums[i])
 
+        #     # Update the overall maximum sum found so far, as the maximum subarray could end at any point up to 'i'
+        #     max_overall_sum = max(max_overall_sum,dp[i])
+        
+        # return max_overall_sum
+
+        # Kadane's Algorithm
+        # This approach is an optimized version of dynamic programming solution
+        # Kadane's Algorithm specifically solves the "Maximum subarray sum" problem
+
+        n = len(nums)
+        
+        if n == 0:
+             return 0
+        
+        max_sum = nums[0]
+        current_sum = nums[0]
+        
+        for i in range(1,n):
+            num = nums[i]
+            # If including the previous subarray's sum (current_sum) makes the overall sum smaller than staring fresh with 'num'
+            # Then we reset 'current_sum' to 'num', efficiently starting a new subarray from 'num'
+            current_sum = max(num, current_sum+num)
+            max_sum = max(max_sum,current_sum)
+        return max_sum
+        
+
+
+        
 
         
 # @lc code=end

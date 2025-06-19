@@ -133,9 +133,7 @@ class Solution(object):
     #         char_set.add(char)
     #     return True
 
-
-
-        # # Brute-force approach(optimized)
+         # # Brute-force approach(optimized)
         # # 
         # n = len(s)
         # if n ==0:
@@ -159,34 +157,36 @@ class Solution(object):
         #             max_length = max(max_length, j-i+1)
         
         # return max_length
-    
-        # Sliding window
-        n=len(s)
-        if n==0:
-            return 0
+
+       
+
+        # # Sliding window
+        # n=len(s)
+        # if n==0:
+        #     return 0
         
-        # Initialize the left pointer
-        left = 0
-        # Initialize the set to stored the used characters
-        char_set = set()
+        # # Initialize the left pointer
+        # left = 0
+        # # Initialize the set to stored the used characters
+        # char_set = set()
 
-        # Iterate through the string
-        for right in range(n):
-            # Store the current character
-            current_char = s[right]
-            # If the current character exists in the used characters set
-            # It means the current_char is already present within the current window s[left:right]
-            # Therefore, we need to shrink the window from the left
-            # until the current_char is not exists in the used characters set
-            while current_char in char_set:
-                char_set.remove(s[left])
-                left +=1
+        # # Iterate through the string
+        # for right in range(n):
+        #     # Store the current character
+        #     current_char = s[right]
+        #     # If the current character exists in the used characters set
+        #     # It means the current_char is already present within the current window s[left:right]
+        #     # Therefore, we need to shrink the window from the left
+        #     # until the current_char is not exists in the used characters set
+        #     while current_char in char_set:
+        #         char_set.remove(s[left])
+        #         left +=1
 
-            char_set.add(current_char)
+        #     char_set.add(current_char)
 
-            max_length = max(max_length, right - left +1)
+        #     max_length = max(max_length, right - left +1)
 
-        return max_length
+        # return max_length
 
 
         
