@@ -122,8 +122,6 @@ class Solution(object):
             dp[i][1] = max(dp[i-1][1], -prices[i])
         # Return the last day most profit when I sold stock 
         return dp[n-1][0]
-        
-        
 
         # # One-Pass Iteration, Greedy Algorithm
         # # Since a stock must be sold after it is bought, we only need to track the minimum price and continuously update the maximum profit based on the current price

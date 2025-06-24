@@ -11,28 +11,51 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-
-    # width = right - left
-    # height = min(height[left], height[right])
-
-        left, right = 0, len(height) - 1
+        # #Brute-Force approach
+        # #This Method  has high complexity and is prone to Time Limit Exceeded(TLE) errors for larger inputs.
+        # n = len(height)
+        # max_area = 0
+        # # Outer loop : 'i' represents the left boundary of a potential container.
+        # for i in range(n):
+        #     # Inner loop: 'j' represents the right boundary of the container, always to the right of 'i'
+        #     for j in range(i+1,n):
+        #         # Calculate the width between the current left(i) and right(j) boundaries
+        #         width = j-i
+        #         #The effective height of the container is limited by the shorter of the two lines (to prevent water from spilling).
+        #         h = min(height[i],height[j])
+        #         # Calculate the current area formed by these two lines
+        #         current_area = h * width
+        #         # Update the max_area if the current_area is larger
+        #         max_area = max(max_area, current_area)
+        
+        # return max_area
+        
+        # Two-Pointer
+        # Optimal approach
+        n = len(height)
+        left = 0
+        right = n-1
         max_area = 0
-
-        #右指針比左指針大,表示還在找最大值
-        while left< right:
-            # 找出左右兩邊的最大值
-            width = (right - left)
+        
+        # The core idea is to use two pointers and shrink the search space.
+        while left < right:
+            width = (right-left)
+            # The effective height is limited by the shorter of the two lines (to prevent water from spilling).
             h = min(height[left], height[right])
+            # Calculate the current area formed by these two lines
             area = width * h
-            max_area = max(max_area, area)
+            # Update the max_area if the current_area is larger
+            max_area = max(max_area,area)
 
-            # 移動較矮的指針才能得到最大的
+            # Move the pointer pointing to the shorter line inward.
+            # This is because moving the taller line's pointer would not increase the height.
+            # And would only decrease the width, thus certainly resulting in a smaller or equal area.
+            # Moving the shorter line's pointer might lead to a lager height and thus a potentially lager area.
             if height[left] < height[right]:
-                left += 1
+                left +=1
             else:
                 right -=1
-                
         return max_area
-        
+
 # @lc code=end
 

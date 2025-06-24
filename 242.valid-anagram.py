@@ -14,7 +14,6 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        
         # # Brute-force approach
         # # This Method has a high time complexity (O(N^3)) and is prone to Time Limit Exceeded(TLE) errors for larger inputs.
         
@@ -42,6 +41,7 @@ class Solution(object):
         # # For 's' and 't' to be anagrams, s_list must now be empty.
         # # Return True if s_list is empty (meaning all characters from s were matched), False otherwise.
         # return not s_list
+       
 
         # # Sorting
 
@@ -76,8 +76,8 @@ class Solution(object):
         #     if count !=0:
         #         return False
         # return True
-
-        # # Array Counting
+        
+         # # Array Counting
         # # Most optimitzed method
 
         # if len(s) != len(t):

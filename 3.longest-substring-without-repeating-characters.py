@@ -158,9 +158,7 @@ class Solution(object):
         
         # return max_length
 
-       
-
-        # # Sliding window
+       # # Sliding window
         # n=len(s)
         # if n==0:
         #     return 0
@@ -187,6 +185,12 @@ class Solution(object):
         #     max_length = max(max_length, right - left +1)
 
         # return max_length
+            
+
+        
+
+
+        
 
 
         
