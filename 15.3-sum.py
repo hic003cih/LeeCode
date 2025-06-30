@@ -75,34 +75,32 @@ class Solution(object):
         #         else:
         #             right -=1
         # return result
+        # return [list(t) for t in res_set
 
-        #Hash Map Approach
-        n =len(nums)
-        if n<3:
-            return []
-        # Use set to store unique triplets and handle duplicates.
-        res_set = set()
+        # #Hash Map Approach
+        # n =len(nums)
+        # if n<3:
+        #     return []
+        # # Use set to store unique triplets and handle duplicates.
+        # res_set = set()
         
-        # Outer loop : Iterate through nums to fix the first element nums[i] of a potential triplet.
-        for i in range(n-2):
-            # Initialize a has set for efficient lookups of the third number (similar to the 2Sum problem).
-            seen = set()
+        # # Outer loop : Iterate through nums to fix the first element nums[i] of a potential triplet.
+        # for i in range(n-2):
+        #     # Initialize a has set for efficient lookups of the third number (similar to the 2Sum problem).
+        #     seen = set()
 
-            for j in range(i+1,n):
-                # Calculate the required complement for nums[i] and nums[j] to sum to zero
-                complement = -nums[i] - nums[j]
+        #     for j in range(i+1,n):
+        #         # Calculate the required complement for nums[i] and nums[j] to sum to zero
+        #         complement = -nums[i] - nums[j]
 
-                # if the complement is found in the seen set
-                # Sort the triplet and convert it to a tuple before adding to res_set to ensure uniqueness.
-                if complement in seen:
-                    triplet = tuple(sorted((nums[i],nums[j],complement)))
-                    res_set.add(triplet)
-                 #Add the nums[j] to the seen set for further lookups
-                seen.add(nums[j])
-           
-        
-        return [list(t) for t in res_set]
-            
-                
+        #         # if the complement is found in the seen set
+        #         # Sort the triplet and convert it to a tuple before adding to res_set to ensure uniqueness.
+        #         if complement in seen:
+        #             triplet = tuple(sorted((nums[i],nums[j],complement)))
+        #             res_set.add(triplet)
+        #          #Add the nums[j] to the seen set for further lookups
+        #         seen.add(nums[j])
+        # return [list(t) for t in res_set
+    
 # @lc code=end
 

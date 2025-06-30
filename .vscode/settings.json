@@ -4,6 +4,10 @@
 		"vector": "cpp",
 		"xutility": "cpp",
 		"utility": "cpp",
-		"unordered_map": "cpp"
+		"unordered_map": "cpp",
+		"initializer_list": "c",
+		"list": "c",
+		"type_traits": "c",
+		"xstring": "c"
 	}
 }
