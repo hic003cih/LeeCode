@@ -10,7 +10,25 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+// #include "uthash.h"
 
+typedef struct
+{
+	int key;
+	int value;
+	UT_hash_handle hh;
+} HashItem;
+
+// 函式來安全地釋放整個雜湊表
+void free_hash_map(HashItem **map)
+{
+	HashItem *current_item, *tmp;
+	HASH_ITER(hh, *map, current_item, tmp)
+	{
+		HASH_DEL(*map, current_item); // 從雜湊表中刪除
+		free(current_item);			  // 釋放結構本身的記憶體
+	}
+}
 int *twoSum(int *numbers, int numbersSize, int target, int *returnSize)
 {
 	// // Brute-Force approach
@@ -83,51 +101,105 @@ int *twoSum(int *numbers, int numbersSize, int target, int *returnSize)
 	// *returnSize = 0;
 	// return NULL;
 
-	// Two-Pointers approach
+	// // Two-Pointers approach
 
-	// Handle edge case where the array has fewer tha two elements.
+	// // Handle edge case where the array has fewer tha two elements.
+	// if (numbersSize < 2)
+	// {
+	// 	*returnSize = 0;
+	// 	return NULL;
+	// }
+
+	// int left = 0;
+	// int right = numbersSize - 1;
+
+	// // Scan the array from both ends using two pointers.
+	// while (left < right)
+	// {
+	// 	int current_sum = numbers[left] + numbers[right];
+
+	// 	if (current_sum == target)
+	// 	{
+	// 		// Allocate memory for the result.
+	// 		int *result = (int *)malloc(2 * sizeof(int));
+	// 		// Check if memory allocation failed.
+	// 		if (result == NULL)
+	// 		{
+	// 			*returnSize = 0;
+	// 			return NULL;
+	// 		}
+	// 		*returnSize = 2;
+	// 		result[0] = left + 1;
+	// 		result[1] = right + 1;
+	// 		return result;
+	// 	}
+	// 	// If the current_sum is smaller than the target, move the left pointer to increase the current_sum.
+	// 	else if (current_sum < target)
+	// 	{
+	// 		left++;
+	// 	}
+	// 	else
+	// 	{
+	// 		// If the current_sum is greater than the target, move the right pointer to decrease the current_sum.
+	// 		// current_sum > target
+	// 		right--;
+	// 	}
+	// }
+	// // If the loops complete, no solution was found.
+	// *returnSize = 0;
+	// return NULL;
+
+	// Hash Map
 	if (numbersSize < 2)
 	{
 		*returnSize = 0;
 		return NULL;
 	}
 
-	int left = 0;
-	int right = numbersSize - 1;
+	HashItem *map = NULL; // 初始化雜湊表為 NULL
 
-	// Scan the array from both ends using two pointers.
-	while (left < right)
+	for (int i = 0; i < numbersSize; i++)
 	{
-		int current_sum = numbers[left] + numbers[right];
+		int complement = target - numbers[i];
+		HashItem *found_item;
 
-		if (current_sum == target)
+		HASH_FIND_INT(map, &complement, found_item);
+
+		if (found_item != NULL)
 		{
+
 			// Allocate memory for the result.
 			int *result = (int *)malloc(2 * sizeof(int));
-			// Check if memory allocation failed.
 			if (result == NULL)
 			{
 				*returnSize = 0;
+				free_hash_map(&map); // 分配失敗也要釋放之前的所有記憶體
 				return NULL;
 			}
 			*returnSize = 2;
-			result[0] = left + 1;
-			result[1] = right + 1;
+			// The stored index is 0-based, so we add 1 for the required 1-based output.
+			result[0] = found_item->value + 1;
+			result[1] = i + 1;
+
+			// Clean up the hash map before returning, as it's no longer needed.
+			free_hash_map(&map);
+
 			return result;
 		}
-		// If the current_sum is smaller than the target, move the left pointer to increase the current_sum.
-		else if (current_sum < target)
+		// If the result is not found, add the current number and index to the hash map
+		HashItem *new_item = (HashItem *)malloc(sizeof(HashItem));
+		if (new_item == NULL)
 		{
-			left++;
+			*returnSize = 0;
+			free_hash_map(&map);
+			return NULL;
 		}
-		else
-		{
-			// If the current_sum is greater than the target, move the right pointer to decrease the current_sum.
-			// current_sum > target
-			right--;
-		}
+		new_item->key = numbers[i];
+		new_item->value = i;
+		HASH_ADD_INT(map, key, new_item);
 	}
-	// If the loops complete, no solution was found.
+
+	free_hash_map(&map);
 	*returnSize = 0;
 	return NULL;
 }
