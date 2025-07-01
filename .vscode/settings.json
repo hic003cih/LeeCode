@@ -8,6 +8,14 @@
 		"initializer_list": "c",
 		"list": "c",
 		"type_traits": "c",
-		"xstring": "c"
+		"xstring": "c",
+		"bit": "c",
+		"compare": "c",
+		"limits": "c",
+		"tuple": "c",
+		"xmemory": "c",
+		"concepts": "c",
+		"exception": "c",
+		"stdio.h": "c"
 	}
 }
