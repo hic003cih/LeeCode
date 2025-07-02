@@ -16,6 +16,10 @@
 		"xmemory": "c",
 		"concepts": "c",
 		"exception": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"stdbool.h": "c",
+		"stdlib.h": "c",
+		"xtr1common": "c",
+		"stddef.h": "c"
 	}
 }
