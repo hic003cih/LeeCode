@@ -3,11 +3,12 @@
  *
  * [219] Contains Duplicate II
  */
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
-// #include "uthash.h" // 假設 uthash.h 標頭檔已在環境中
-
+#include "uthash.h" // 假設 uthash.h 標頭檔已在環境中
+// @lc code=start
 typedef struct
 {
 	int key;
@@ -24,7 +25,6 @@ void free_hash_map(HashItem **map)
 		free(current_item);			  // 釋放結構本身的記憶體
 	}
 }
-// @lc code=start
 bool containsNearbyDuplicate(int *nums, int numsSize, int k)
 {
 	// // Brute - force approach
@@ -105,7 +105,7 @@ bool containsNearbyDuplicate(int *nums, int numsSize, int k)
 		if (found_item != NULL)
 		{
 			// Yes, a duplicate is found within the k-distance window.
-			free_hash_set(&set);
+			free_hash_map(&set);
 			return true;
 		}
 
@@ -113,7 +113,7 @@ bool containsNearbyDuplicate(int *nums, int numsSize, int k)
 		HashItem *new_item = malloc(sizeof(HashItem));
 		if (new_item == NULL)
 		{
-			free_hash_set(&set);
+			free_hash_map(&set);
 			return false; // Memory allocation failure
 		}
 		new_item->key = current_num;
@@ -133,5 +133,9 @@ bool containsNearbyDuplicate(int *nums, int numsSize, int k)
 			}
 		}
 	}
+
+	// No duplicate found within distance k.
+	free_hash_map(&set);
+	return false;
 }
 // @lc code=end

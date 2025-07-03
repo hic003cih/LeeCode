@@ -20,6 +20,10 @@
 		"stdbool.h": "c",
 		"stdlib.h": "c",
 		"xtr1common": "c",
-		"stddef.h": "c"
+		"stddef.h": "c",
+		"cmath": "c",
+		"iosfwd": "c",
+		"xstddef": "c",
+		"stdexcept": "c"
 	}
 }
