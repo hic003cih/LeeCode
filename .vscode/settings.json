@@ -24,6 +24,7 @@
 		"cmath": "c",
 		"iosfwd": "c",
 		"xstddef": "c",
-		"stdexcept": "c"
+		"stdexcept": "c",
+		"string.h": "c"
 	}
 }
