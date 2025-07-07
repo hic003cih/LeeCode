@@ -25,6 +25,7 @@
 		"iosfwd": "c",
 		"xstddef": "c",
 		"stdexcept": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"new": "c"
 	}
 }

@@ -80,34 +80,34 @@ int lengthOfLongestSubstring(char *s)
 	// return maxLength;
 
 	// Sliding window + HashMap
-	int n = strlen(s);
-	int maxLength = 0;
+	// int n = strlen(s);
+	// int maxLength = 0;
 
-	// Use array as a hash map map[char] -> index
-	//  Initialize the value as -1
-	int map[128];
-	for (int i = 0; i < 128; i++)
-	{
-		map[i] = -1;
-	}
+	// // Use array as a hash map map[char] -> index
+	// //  Initialize the value as -1
+	// int map[128];
+	// for (int i = 0; i < 128; i++)
+	// {
+	// 	map[i] = -1;
+	// }
 
-	int left = 0;
-	for (int right = 0; right < n; right++)
-	{
-		char char_right = s[right];
+	// int left = 0;
+	// for (int right = 0; right < n; right++)
+	// {
+	// 	char char_right = s[right];
 
-		// Check if the character has been seen before, and its last occurrence is within the current window(right - left + 1)
-		if (map[char_right] >= left)
-		{
-			// Move the left pointer to the position right after the last occurrence of the duplicate character.
-			left = map[char_right] + 1;
-		}
-		// Update the character's newest index
-		map[char_right] = right;
+	// 	// Check if the character has been seen before, and its last occurrence is within the current window(right - left + 1)
+	// 	if (map[char_right] >= left)
+	// 	{
+	// 		// Move the left pointer to the position right after the last occurrence of the duplicate character.
+	// 		left = map[char_right] + 1;
+	// 	}
+	// 	// Update the character's newest index
+	// 	map[char_right] = right;
 
-		// Update the max Length
-		maxLength = max(maxLength, right - left + 1);
-	}
-	return maxLength;
+	// 	// Update the max Length
+	// 	maxLength = max(maxLength, right - left + 1);
+	// }
+	// return maxLength;
 }
 // @lc code=end
