@@ -9,7 +9,7 @@ class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
 
         # # Brute-force approach
-        # # This approach is inefficient and will likely caused a Time Limit Exceeded error on large inputs.
+        # # This approach is inefficient and will likely cause a Time Limit Exceeded error on large inputs.
         # len_s,len_p = len(s),len(p)
 
         # if len_p > len_s:
