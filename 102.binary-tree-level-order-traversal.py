@@ -11,61 +11,64 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+import collections
 
-# 廣度優先搜索 (BFS)，通常會藉助一個佇列 (Queue) 
 class Solution(object):
     def levelOrder(self, root):
         """
         :type root: Optional[TreeNode]
         :rtype: List[List[int]]
         """
-        # 先處裡邊界條件,如果root為空,返回空list
-        # handle edge case, if root is empty, return empty list
-        if not root:
-            return []
-        # 初始化結果列表和隊列
-        # initialize result first and queue
-        result = []
-        # 初始化佇列並加入根節點
-        # initialize queue and add root node
-        queue = [root]
+    #     #Depth-First Search(DFS)
+    #     if not root:
+    #         return []
+    #     results = []
 
-        while queue:
-            # 獲得當前層的節點數量
-            # get the number of nodes in the current level
-            level_size = len(queue)
-            # 初始化當前層的節點值列表
-            # initialize list to store node values in the current level
-            current_level_values = []
-
-            # 處理當前層的所有節點
-            # process all nodes in the current level
-
-            for _ in range(level_size):
-                # 從隊列中取出節點
-                # pop node from queue
-                node = queue.pop(0)
-                # 將節點值加入當前層列表
-                # add node value to current level list
-                current_level_values.append(node.val)
-
-                # 如果節點有左子節點,將左子節點加入隊列
-                # if node has left child, add left child to queue
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-            
-            # 將當前層的節點值列表加入結果列表
-            # add current level list to result list
-            result.append(current_level_values)
+    #     self._dfs(root,0,results)
+    #     return results
+    
+    # def _dfs(self,node,level,results):
+    #     #Base case for the recursion.
+    #     if not node:
+    #         return
+    #     # When we first visit a new level, we need to create a new sublist
+    #     # The level index corresponds to the list's size at that moment.
+    #     if level == len(results):
+    #         results.append([])
         
-        # 返回結果
-        # return result
-        return result
+    #     # Add the current node's value to its corresponding level's list.
+    #     results[level].append(node.val)
 
+    #     #Recurse for the left and right children at the next level.
+    #     self._dfs(node.left, level+1,results)
+    #     self._dfs(node.right, level+1,results)
 
+        # Breadth-First Search 廣度優先搜索 (BFS)，通常會藉助一個佇列 (Queue) 
 
-        
+        # # Handle the edge case of an empty tree.
+        # if not root:
+        #     return []
+        # #Use a deque for an efficient O(1) pop from the left.
+        # queue = collections.deque([root])
+        # results = []
+
+        # while queue:
+        #     #At the beginning of each loop, the queue holds all nodes for the current level.
+        #     level_size =len(queue)
+        #     current_level = []
+        #     #Process all nodes for the current level.
+        #     for _ in range(level_size):
+        #         #Dequeue the node from the front.
+        #         node = queue.popleft()
+        #         current_level.append(node.val)
+
+        #         #Enqueue children for the next level.
+        #         if node.left:
+        #             queue.append(node.left)
+        #         if node.right:
+        #             queue.append(node.right)
+        #     results.append(current_level)
+        # return results
+
 # @lc code=end
 
