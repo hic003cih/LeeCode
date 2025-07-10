@@ -56,6 +56,8 @@ class Solution:
 
         # Slide the window across the rest of s, one character at a time.
         for i in range(len_p,len_s):
+            # ord('a') - ord('a')  =>  97 - 97  =>  0
+            # ord('b') - ord('a')  =>  98 - 97  =>  1
             # Add the new character entering the window from the right.
             s_window[ord(s[i]) - ord_a] += 1
             # Remove the old character leaving the window from the left.
