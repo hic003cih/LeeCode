@@ -13,7 +13,7 @@
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        # #Recursion
+        # #DFS+Recursion
         # # Base case for recursion: if there are no elements, it's a null node.
         # if not preorder or not inorder:
         #     return None
@@ -34,7 +34,7 @@ class Solution:
         
         # return root
 
-        #Recursion + HashMap
+        #DFS+ Recursion + HashMap
         #Pre-Computer a hash map for O(1) lookups of inorder indices
 
         inorder_map = {val:idx for idx,val in enumerate(inorder)}
