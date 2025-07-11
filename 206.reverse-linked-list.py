@@ -12,7 +12,7 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # #Iteration
+        # #1. Iteration
         # #'prev' will store the previous node, initialized to None as the nex tail
         # prev = None
         # # 'curr' is the current node we are processing.
@@ -32,7 +32,7 @@ class Solution:
         # # When the loop ends, 'prev' will be the new head of the reversed list.
         # return prev
 
-        #Recursion
+        #2. Recursion
         #Base case for recursion: An empty list or a single-node list is already reversed.
         if not head or not head.next:
             return head
