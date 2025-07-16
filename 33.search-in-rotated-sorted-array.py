@@ -12,30 +12,31 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        #Input: nums = [4,5,6,7,0,1,2], target = 0
-        # Output: 4     
+        # Brute-force
+        # for i in range(len(nums)):
+        #     if nums[i]==target:
+        #         return i
+        # return -1
 
-        left,right = 0, len(nums) - 1
+        #Binary search
+        left,right =0,len(nums)-1
 
-        while left <= right:
-            mid = (left + right) // 2 #Calculate the middle index
+        while left <=right:
+            mid = (left+right)//2
 
-            if nums[mid] == target:
-                return mid #Found the target, return its index
-    
-            #Determine which part is sorted
-            if nums[left] <= nums[mid]: #Left half is sorted
-                if nums[left] <= target < nums[mid]: #Target is in the left part
-                    right = mid - 1
-                else: #Target is in the right half
-                    left = mid + 1
-            else: #Right half is sorted
-                if nums[mid] < target <= nums[right]: #Target is in the right half
-                    left = mid + 1
-                else: #Target is in the left half
-                    right = mid - 1
-        return -1 # Target not found
-                
-            
+            if nums[mid]==target:
+                return mid
+            if nums[left] <=nums[mid]:
+                if nums[left] <=target < nums[mid]:
+                    right = mid-1
+                else:
+                    left = mid +1
+            else:
+                if nums[mid] < target <= nums[right]:
+                    left = mid +1
+                else:
+                    right = mid -1
+        return -1
+
 # @lc code=end
 
