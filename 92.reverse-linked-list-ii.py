@@ -44,6 +44,8 @@ class Solution:
         # return head
 
         # head = [1, 2, 3, 4, 5], left =2,right=4
+
+        
         # One-Pass, Pointer Manipulation
         if not head or left==right:
             return head
