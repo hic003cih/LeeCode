@@ -30,7 +30,8 @@ class Solution:
         # return min_heap[0]
 
         # 3. Quick select
-        # nums = [3, 2, 1, 5, 6, 4]
+        # Divide and Conquer
+        # nums = [3, 2, 4, 1, 5]
         target_index = len(nums) - k
         left,right = 0, len(nums) -1
 

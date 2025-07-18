@@ -5,6 +5,9 @@
 #
 
 # @lc code=start
+from collections import Counter
+import heapq
+
 class Solution(object):
 
     from collections import Counter
@@ -16,43 +19,55 @@ class Solution(object):
         """
         # nums = [1,1,1,2,2,3], k = 2
 
-        # heap（小頂堆）
-        # count = Counter(nums)
-        # return [item for item, freq in heapq.nlargest(k, count.items(), key=lambda x: x[1])]
+        # #1. Brute-force
+        # # Step1:Count the frequency of each number.
+        # freq_map = Counter(nums)
 
-        # Bucket Sort
-        # 計算每個數字出現的頻率
-        # Count the frequency of each number
-        # count = {1:3, 2:2, 3:1}
-        count = Counter(nums)
+        # # Step2: Sort the items by frequency in descending order.
+        # sorted_items = sorted(freq_map.items(), key = lambda item:item[1],reverse=True)
 
-         # 初始化桶子,建立一個長度為 nums + 1 的陣列
-         # Initialize buckets, create an array of length nums + 1
-        # freq[1] = [3], freq[2] = [2], freq[3] = [1]
-        freq = [[] for _ in range(len(nums) + 1)]
-         # count = {1:3, 2:2, 3:1}
-         # freq[1] = [3], freq[2] = [2], freq[3] = [1]
-        for num, c in count.items():
-            freq[c].append(num)
+        # #Step3:Extract the top k elements.
+        # result = [item[0] for item in sorted_items[:k]]
 
-        # 找出前 K 個出現次數最多的元素
-        # Find the top K most frequent elements
-        res = []
-        # 掃 freq 陣列的 index,從最大的index往下數,到最小的index(freq[1]), ex. range(6, 0, -1) 從6到0,每次減一
-        # Scan the index of freq array from largest to smallest, ex. range(6, 0, -1) from 6 to 0, each time minus 1
-        for i in range(len(freq) -1 , 0, -1):
-            # 將該頻率的元素加入結果res中
-            # Add the elements of the corresponding frequency to res
-            for num in freq[i]:
-                # 將num加入res中
-                # Add num to res
-                res.append(num)
-                # 如果長度到達k,則直接返回結果
-                # If the length reaches k, return the result
-                if len(res) == k:
-                    return res
+        # return result
 
-        
+        # #2. Min-Heap
+        # #Step1: Count frequencies.
+        # if k == len(nums):
+        #     return nums
+        # freq_map = Counter(nums)
+        # #Use a min-heap to find the top k frequent elements.
+        # min_heap =[]
+        # for num, freq in freq_map.items():
+        #     heapq.heappush(min_heap, (freq, num))
+        #     # If the heap size exceeds k, pop the element with the smallest frequency.
+        #     if len(min_heap) > k:
+        #         heapq.heappop(min_heap)
+        # # Extract the numbers from the heap.
+        # return [item[1] for item in min_heap]
+
+        # 3. Bucket Sort
+        # Count frequencies of each number.
+        freq_map = Counter(nums)
+
+        # Create buckets where the index represents frequency.
+        buckets = [[] for _ in range(len(nums) + 1)]
+
+        # Populate the buckets. where m is unique elements.
+        for num, freq in freq_map.items():
+            buckets[freq].append(num)
+
+        # Iterate through buckets from highest frequency to lowest.
+        result = []
+        for i in range(len(buckets) - 1, 0, -1):
+            for num in buckets[i]:
+                result.append(num)
+                if len(result) == k:
+                    return result
+        return result
+
+
+
 
         
 # @lc code=end
