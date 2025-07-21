@@ -62,7 +62,5 @@ class Solution:
         nums[right], nums[store_index] = nums[store_index], nums[right]
         
         return store_index
-
-
 # @lc code=end
 
