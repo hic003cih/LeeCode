@@ -1,82 +1,86 @@
 #
-# @lc app=leetcode id=210 lang=python
+# @lc app=leetcode id=210 lang=python3
 #
 # [210] Course Schedule II
 #
 
 # @lc code=start
-class Solution(object):
-    def findOrder(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: List[int]
-        """
-        graph = {i: [] for i in range(numCourses)}
+from collections import deque
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # # 1. Kahn's Algorithm / BFS
+        # # Build adjacency list and in-degree array.
+        # adj_list = [[] for _ in range(numCourses)]
+        # in_degree = [0] * numCourses
+
+        # for course, prereq in prerequisites:
+        #     adj_list[prereq].append(course)
+        #     in_degree[course] +=1
+        
+        # # Initialize the queue with course that have no prerequisties.
+        # queue = deque([ i for i in range(numCourses) if in_degree[i] == 0])
+
+        # # This list will store the topological sort order.
+        # topological_order = []
+
+        # # Process the queue.
+        # while queue:
+
+        #     # Take a course that has all its prerequisites met.
+        #     course = queue.popleft()
+        #     # Add it to our result list
+        #     topological_order.append(course)
+
+        #     # For each course that depends on the one just taken.
+        #     for next_course in adj_list[course]:
+        #         in_degree[next_course] -=1
+        #         # If all prerequisites for this course are now met, add it to the queue.
+        #         if in_degree[next_course] == 0:
+        #             queue.append(next_course)
+        # # If we could take all courses, the order is valid.
+        # if len(topological_order) == numCourses:
+        #     return topological_order
+        # else:
+        #     return []
+
+        # 2. DFS
+        # Build adjacency list
+        adj_list = [[] for _ in range(numCourses)]
         for course, prereq in prerequisites:
-            # 如果先修課還沒出現,給這個先修課一個空的list,用來存後面的後修課
-            # If the prerequisite courses have not appeared, give the prerequisite course an empty list, used to store subsequent courses
-            # if prereq not in graph:
-            #     graph[prereq] = []
-            # 將後修課加入先修課的list中
-            # Add subsequent courses to the list of prerequisite courses
-            graph[prereq].append(course)
-        
-        # 0 = 未訪問, 1 = 訪問中, 2 = 已完成
-        # 0 = unvisited, 1 = visiting, 2 = visited
-        visit = [0] * numCourses
-        # 用來存儲結果
-        # Used to store the result
-        result = []
+            adj_list[prereq].append(course)
 
-        def dfs(course):
-            # 先檢查是不是已經處理完成
-            # First check if it has been processed
-            # 如果該節點已經訪問過,又訪問到一次,表示有環,所以會循環到,沒辦法完成課程,將檢查有沒有環的變數改成False
-            # If the node has been visited, visit it again, it means there is a cycle, so it will loop, can't finish the course, change the check variable to False
-            if visit[course] == 1:
-                return False
-            # 已經訪問完成,直接返回
-            # If the node has been visited, directly return
-            if visit[course] == 2:
-                return True
+        # visited states: 0 = unvisited, 1 = visiting (in current DFS path), 2= visited
+        visited = [0] * numCourses
+        # This list will store the topological sort. We build it backwards.
+        topological_order = []
+
+        def has_cycle(course):
+            # Mark the current node as visiting
+            visited[course] = 1
+
+            for neighbor in adj_list[course]:
+                if visited[neighbor] ==1:
+                    return True
+                if visited[neighbor] == 0:
+                    if has_cycle(neighbor):
+                        return True
+            # All descendants visited, mark this node as fully visited.
+            visited[course] = 2
+            # Add the course to the front of our order list
+            topological_order.insert(0, course)
+            return False
+        #Check for cycles starting from each course
+        for i in range(numCourses):
+            if visited[i] ==0:
+                if has_cycle(i):
+                    return []
+        
+        return topological_order
+
+
+
+
+
             
-            # 沒有訪問過,則開始執行訪問過程
-            # If it has not been visited, start the visit process
-            # 剛執行訪問中,改成1
-            # Just execute the visiting, change it to 1
-            visit[course] = 1
-
-            # 如果該節點有後修課,則遍歷後修課
-            # If the node has subsequent courses, traverse subsequent courses
-            if course in graph:
-                for neighbor in graph[course]:
-                    # 遞歸訪問後修課,如果還沒訪問狀態就是1(訪問中),則表示有環,返回False
-                    # Recursively visit subsequent courses, if there is a cycle, return False
-                    if not dfs(neighbor):
-                        return False
-                
-            # 遞歸訪問完成,改成2
-            # Recursive visit completed, change it to 2
-            visit[course] = 2
-            result.append(course)
-            return True
-
-        # 遍歷所有課程
-        # Traverse all courses
-        for course in range(numCourses):
-            # 如果該節點還沒訪問過,則遞歸訪問該節點
-            # If the node has not been visited, recursively visit the node
-            if visit[course] ==0:
-                # 執行遞歸訪問,如果有環,則返回空列表
-                # Execute the recursive visit, if there is a cycle, return an empty list
-                if not dfs(course):
-                    return []  # 有環 → 無法修完所有課
-        
-        # 反轉結果：從後修課排序成先修順序
-        # Reverse the result: sort from subsequent courses to prerequisite order
-        return result[::-1]
-        
-
 # @lc code=end
 
