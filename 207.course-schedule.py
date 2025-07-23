@@ -1,77 +1,80 @@
 #
-# @lc app=leetcode id=207 lang=python
+# @lc app=leetcode id=207 lang=python3
 #
 # [207] Course Schedule
 #
 
 # @lc code=start
-class Solution(object):
-    def canFinish(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
-        # 建立一個 graph,用來儲存圖的結構
-        # Create a graph, used to store the structure of the graph
-        graph = {}
-        for course, prereq in prerequisites:
-            # 如果先修課還沒出現,給這個先修課一個空的list,用來存後面的後修課
-            # If the prerequisite courses have not appeared, give the prerequisite course an empty list, used to store subsequent courses
-            if prereq not in graph:
-                graph[prereq] = []
-            # 將後修課加入先修課的list中
-            # Add subsequent courses to the list of prerequisite courses
-            graph[prereq].append(course)
-        # 0 = 未訪問, 1 = 訪問中, 2 = 已完成
-        # 0 = unvisited, 1 = visiting, 2 = visited
-        visit = [0] * numCourses
+from collections import deque
+from typing import List
 
-        def dfs(course):
-            # 先檢查是不是已經處理完成
-            # First check if it has been processed
-            # 如果該節點已經訪問過,又訪問到一次,表示有環,所以會循環到,沒辦法完成課程,直接返回False
-            # If the node has been visited, visit it again, it means there is a cycle, so it will loop, can't finish the course ,directly return False
-            if visit[course] == 1:
-                return False
-            # 已經訪問完成, 表示沒有環, 可以完成課程,直接返回True
-            # If the node has been visited, it means there is no cycle, can finish the course, directly return True
-            if visit[course] == 2:
-                return True
-            
-            # 沒有訪問過,則開始執行訪問過程
-            # If it has not been visited, start the visit process
-            # 剛執行訪問中,改成1
-            # Just execute the visiting, change it to 1
-            visit[course] = 1
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # numCourses = 4, prerequisites = [[1, 0], [2, 0], [3, 1], [3, 2]]
+        # # 1. Kahn's Algorithm / Breath-First Search(BFS)
+        # # Build adjacency list and in-degree array
+        # adj_list = [[] for _ in range(numCourses)]
+        # in_degree = [0] * numCourses
 
-            # 如果該節點有後修課,則遍歷後修課
-            # If the node has subsequent courses, traverse subsequent courses
-            if course in graph:
-                for neighbor in graph[course]:
-                    # 遞歸訪問後修課,如果有環,則返回False
-                    # Recursively visit subsequent courses, if there is a cycle, return False
-                    if not dfs(neighbor):
-                        return False
-                
-            # 遞歸訪問完成,改成2
-            # Recursive visit completed, change it to 2
-            visit[course] = 2
-            return True
+        # for course, prereq in prerequisites:
+        #     adj_list[prereq].append(course)
+        #     in_degree[course] += 1
         
-        # 初執行遞歸訪問
-        # Initialize recursive visit
-        for i in range(numCourses):
-            # 如果收到false,表示有環,則返回False
-            # If false is received, there is a cycle, return False
-            if not dfs(i):
-                return False
-            
+        # # Initialize the queue with all courses that have no prerequisites
+        # queue = deque([i for i in range(numCourses) if in_degree[i]==0])
+
+        # courses_taken =0
+
+        # #Process the courses
+        # while queue:
+        #     course = queue.popleft()
+        #     courses_taken +=1
+
+        #     #For each course that depends on the one just taken
+        #     for next_course in adj_list[course]:
+        #         #Decrement its in-degree
+        #         in_degree[next_course] -=1
+        #         # If all its prerequisites are now met, add it to the queue
+        #         if in_degree[next_course] == 0:
+        #             queue.append(next_course)
+        # # If the number of courses taken equals the total, it's possible
+        # return courses_taken == numCourses
+
+        # 2. Depth First Search
+        #Build adjacency list
+        adj_list = [[] for _ in range(numCourses)]
+        for course, prereq in prerequisites:
+            adj_list[prereq].append(course)
+        
+        # visited states : 0 = unvisited, 1 = visiting, 2 = visited
+        visited = [0] * numCourses
+
+        def has_cycle(course):
+            # Mark the current node as visiting
+            visited[course] = 1
+
+            #Recur for all the neighbors
+            for neighbor in adj_list[course]:
+                # If the neighbor is being visited, we found a cycle
+                if visited[neighbor] == 1:
+                    return True
+                # If the neighbor is unvisited, start a new DFS from it
+                if visited[neighbor] == 0:
+                    if has_cycle(neighbor):
+                        return True
+            # If we explored all paths from this node without finding a cycle.
+            # mark it as fully visited.
+            visited[course] = 2
+            return False
+        
+        # Check for cycles staring from each course.
+        for i in range (numCourses):
+            if visited[i] == 0:
+                if has_cycle(i):
+                    return False
         return True
 
-        
 
 
-        
 # @lc code=end
 
