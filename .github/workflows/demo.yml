@@ -1,0 +1,20 @@
+name: My First Pipeline
+
+# 1. Trigger (觸發條件): 當有人 push 到 main 分支時執行
+on:
+  push:
+    branches: [ "main" ]
+
+# 2. Jobs (任務): 定義要執行的工作
+jobs:
+  say-hello:
+    # 3. Runner (運行環境): 指定要在哪種虛擬機上跑 (這裡是最新版 Ubuntu Linux)
+    runs-on: ubuntu-latest
+    
+    # 4. Steps (步驟): 具體執行的指令
+    steps:
+      - name: Say Hello
+        run: echo "Hello, CMU! The pipeline is working!"
+        
+      - name: Check System Info
+        run: uname -a
