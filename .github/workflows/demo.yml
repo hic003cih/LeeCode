@@ -1,20 +1,28 @@
-name: My First Pipeline
+name: CI Pipeline
 
-# 1. Trigger (觸發條件): 當有人 push 到 master 分支時執行
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master" ]  # 確保這裡跟你實際的分支名稱一致
 
-# 2. Jobs (任務): 定義要執行的工作
 jobs:
-  say-hello:
-    # 3. Runner (運行環境): 指定要在哪種虛擬機上跑 (這裡是最新版 Ubuntu Linux)
+  build-and-test:
     runs-on: ubuntu-latest
-    
-    # 4. Steps (步驟): 具體執行的指令
+
     steps:
-      - name: Say Hello
-        run: echo "Hello, CMU! The pipeline is working!"
-        
-      - name: Check System Info
-        run: uname -a
+      # 第一步：把程式碼拉下來 (Checkout)
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 第二步：安裝 Python 環境
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # 第三步：顯示 Python 版本 (確認環境 OK)
+      - name: Display Python version
+        run: python --version
+
+      # 第四步：執行測試 (關鍵步驟！)
+      - name: Run Unit Tests
+        run: python test_calc.py
