@@ -2,7 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ "master" ]  # 確保這裡跟你實際的分支名稱一致
+    tags:
+      - 'v*' # 只有當 Tag 是 v 開頭 (如 v1.0, v2.0) 時才觸發
+    # branches: [ "master" ]  <-- 暫時註解掉這行，避免普通的 push 也觸發發布
 
 jobs:
   build-and-test:
