@@ -1,6 +1,6 @@
 # calc.py
 def add(x, y):
-    return x + y
+    return x + y + 1
 
 def divide(x, y):
     if y == 0:
